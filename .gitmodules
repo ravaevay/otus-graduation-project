@@ -1,0 +1,6 @@
+[submodule "microservices/search_engine_crawler"]
+	path = microservices/search_engine_crawler
+	url = https://github.com/express42/search_engine_crawler.git
+[submodule "microservices/search_engine_ui"]
+	path = microservices/search_engine_ui
+	url = https://github.com/express42/search_engine_ui.git
