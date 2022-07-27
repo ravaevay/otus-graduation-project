@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  app_db:
+    image: mongo:3.2
+    volumes:
+      - app_mongo_db:/data/db
+    networks:
+      BACK_NET:
+        aliases:
+          - crawler_db
+          - ui_db
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+
+  rabbinmq:
+    image: rabbitmq:3.9.21-alpine
+    volumes:
+      - rabbit-vol:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASS}
+    netwotrks:
+      BACK_NET:
+        aliases:
+          - rabbitmq
+
+  ui:
+    build: ./search_engine_ui
+    
