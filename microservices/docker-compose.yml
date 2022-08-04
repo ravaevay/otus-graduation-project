@@ -62,6 +62,27 @@ services:
        aliases:
         - crawler
       FRONT_NET:
+
+  node-exporter:
+    image: prom/node-exporter:v0.15.2
+    user: root
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    ports:
+      - 9100:9100
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
+    networks:
+      BACK_NET:
+        aliases:
+          node_exporter
+
+
+  
     
 volumes:
   app_mongo_db:
