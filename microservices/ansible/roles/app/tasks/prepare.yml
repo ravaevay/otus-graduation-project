@@ -1,0 +1,23 @@
+- name: Deploy docker on app infrastructure
+  become: true
+  gather_facts: false
+
+  pre_tasks:
+    - name: Wait connection
+      wait_for_connection:
+    - name: Gather facts
+      setup:
+    - name: Install Python3-pip
+      apt:
+        name: python3-pip
+        update_cache: true
+    - name: Install python modules docker and docker-compose
+      pip:
+        name: 
+          - docker
+          - docker-compose
+
+  roles:
+    - role: geerlingguy.docker
+      vars:
+        docker_users: ubuntu

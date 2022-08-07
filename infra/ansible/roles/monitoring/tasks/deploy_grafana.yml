@@ -1,0 +1,23 @@
+- name: Deploy grafana docker image
+  docker_container:
+    container_default_behavior: compatibility
+    name: grafana
+    image: grafana/grafana:9.0.6
+    state: started
+    restart_policy: always
+    ports:
+      - '80:3000'
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - '/srv/grafana/:/etc/grafana'
+      - '/srv/grafana/dashboards:/var/lib/grafana/dashboards'
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention=1d'
+      - '--web.enable-lifecycle'
+    networks:
+      - name: BACK_NET
+        aliases:
+          - BACK_NET
+    purge_networks: true

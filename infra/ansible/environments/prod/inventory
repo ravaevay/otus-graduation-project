@@ -1,0 +1,5 @@
+[app_hosts]
+app-host ansible_host=62.84.118.164
+
+[monitoring_hosts]
+monitoring-host ansible_host=62.84.116.163

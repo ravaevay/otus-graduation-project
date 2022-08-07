@@ -1,8 +1,8 @@
-- name: Deploy YC infrastructure for app
+- name: Deploy YC infra
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: Deploy YC with terraform
+    - name: Deploy YC infra with terraform
       terraform:
         force_init: true
         project_path: ../../terraform
@@ -18,8 +18,8 @@
           skip_credentials_validation: "true"
     - meta: refresh_inventory
 
-- name: Deploy docker on app infrastructure
-  hosts: app_hosts
+- name: Deploy python docker modules
+  hosts: all
   become: true
   gather_facts: false
 
@@ -28,7 +28,7 @@
       wait_for_connection:
     - name: Gather facts
       setup:
-    - name: Install Python3-pip
+    - name: Install python3-pip
       apt:
         name: python3-pip
         update_cache: true
@@ -36,21 +36,23 @@
       pip:
         name: 
           - docker
-          - docker-compose
+        #  - docker-compose
 
   roles:
     - role: geerlingguy.docker
       vars:
         docker_users: ubuntu
 
-  tasks:
-    - name: Deploy app images
-      include_tasks: app.yml
+- name: Deploy gitlab-ci
+  hosts: gitlab_hosts
+  become: true
 
-- name: Configure monitoring
+  roles:
+    - role: gitlab-ci
+
+- name: Deploy Monitoring Stack
   hosts: monitoring_hosts
   become: true
-  tasks:
 
-    - name: Run monitoring configure tasks
-      include_tasks: monitoring.yml
+  roles:
+    - role: monitoring
