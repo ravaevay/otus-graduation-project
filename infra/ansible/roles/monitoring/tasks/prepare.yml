@@ -1,13 +1,13 @@
 - name: Create BACK_NET network for app
   docker_network:
     name: BACK_NET
-    ipam_options:
+    ipam_driver_options:
       subnet: '10.0.1.0/24'
 
 - name: Create FRONT_NET network for app
   docker_network:
     name: FRONT_NET
-    ipam_options:
+    ipam_driver_options:
       subnet: '10.0.2.0/24'
 
 - name: Create directories

@@ -1,8 +1,16 @@
 - name: Copy app sources on remote host
   copy:
-    src: ../../../src/
+    src: ../../../../src/
     dest: /srv/app
-  
+
+- name: Create dir for app and compose file
+  file:
+    path: '{{ item }}'
+    state: file
+    mode: '0755'
+  with_items:
+    - /srv/app/docker-compose.yml
+
 - name: Deploy app images with docker-compose
   docker_compose:
     project_src: /srv/app

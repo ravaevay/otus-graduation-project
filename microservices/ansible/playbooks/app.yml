@@ -1,0 +1,53 @@
+- name: Deploy YC infrastructure for app
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Deploy YC with terraform
+      terraform:
+        force_init: true
+        project_path: ../../terraform
+        state: "{{ tf_state }}"
+        backend_config:
+          endpoint  : "storage.yandexcloud.net"
+          bucket    : "{{ tf_bucket_name }}"
+          region    : "us-east-1"
+          key       : "{{ tf_bucket_state_file_name }}"
+          access_key: "{{ tf_bucket_access_key }}"
+          secret_key: "{{ tf_bucket_secret_key }}"
+          skip_region_validation     : "true"
+          skip_credentials_validation: "true"
+    - meta: refresh_inventory
+
+
+- name: Deploy Crawler application on YC
+  hosts: app_hosts
+  become: true
+
+  pre_tasks:
+    - name: Wait connection
+      wait_for_connection:
+        delay: 60
+    - name: Gather facts
+      setup:
+    - name: Install Python3-pip
+      apt:
+        name: python3-pip
+        update_cache: true
+    - name: Install python modules docker and docker-compose
+      pip:
+        name: 
+          - docker
+          - docker-compose
+
+  roles:
+    - { role: geerlingguy.docker, docker_users: 'ubuntu' }
+    - app
+    
+
+- name: Configure monitoring
+  hosts: monitoring_hosts
+  become: true
+  tasks:
+
+    - name: Check and modify monitoring configuration
+      include_tasks: monitoring_config.yml

@@ -31,7 +31,7 @@ services:
       - MONGO=mongodb
       - MONGO_PORT=27017
     ports:
-      - 8001:8000
+      - 80:8000
     networks:
       BACK_NET:
         aliases:
@@ -51,8 +51,9 @@ services:
       - RMQ_USERNAME=${RABBITMQ_USER}
       - RMQ_PASSWORD=${RABBITMQ_PASS}
       - EXCLUDE_URLS=${EXLUDE_URLS}
+      - URL=${URL}
     ports:
-      - 8002:8000
+      - 8001:8000
     restart: on-failure
     depends_on:
       - mongodb
@@ -79,7 +80,7 @@ services:
     networks:
       BACK_NET:
         aliases:
-          node_exporter
+         - node_exporter
 
 
   

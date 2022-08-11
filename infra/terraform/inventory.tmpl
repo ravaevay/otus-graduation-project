@@ -1,6 +1,6 @@
-[app_hosts]
+[gitlab_hosts]
 %{ for ip in instance_gitlab_ip ~}
-app-host ansible_host=${ip}
+gitlab-host ansible_host=${ip}
 %{ endfor ~}
 
 [monitoring_hosts]

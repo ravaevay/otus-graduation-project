@@ -22,3 +22,7 @@ variable subnet_id {
 variable image_id {
     description = "VM image ID"
 }
+
+variable service_account_key_file {
+    description = "Path to service account file"
+}

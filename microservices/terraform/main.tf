@@ -9,14 +9,14 @@ terraform {
 }
 
 provider "yandex" {
-  service_account_key_file = var.service_account_key_file
+  service_account_key_file = pathexpand("~/yandex-cloud/terraform-key.json")
   cloud_id                 = var.cloud_id
   folder_id                = var.folder_id
   zone                     = var.zone
 }
 
-resource "yandex_compute_instance" "app_instance" {
-    name = "app_vm"
+resource "yandex_compute_instance" "app_vm" {
+    name = "app"
 
     resources {
     cores  = 2

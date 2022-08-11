@@ -11,11 +11,6 @@
       - grafana_data:/var/lib/grafana
       - '/srv/grafana/:/etc/grafana'
       - '/srv/grafana/dashboards:/var/lib/grafana/dashboards'
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--storage.tsdb.retention=1d'
-      - '--web.enable-lifecycle'
     networks:
       - name: BACK_NET
         aliases:
