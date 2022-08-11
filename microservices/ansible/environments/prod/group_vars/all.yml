@@ -1,0 +1,22 @@
+tf_state: present
+
+tf_bucket_name: terraform-otus-crawler-state
+tf_bucket_state_file_name: terraform-otus-crawler-app.tfstate
+tf_bucket_access_key: YCAJEylpPtxRqcXTWSS67Ssw9 # set yours
+tf_bucket_secret_key: YCPKfyd59i0wg85HDE86sLtR7s-pwL9GPXVBYeFo # set yours
+
+docker_install_compose: true
+
+prometheus_jobs_create: |
+  - targets:
+    - "{{ hostvars['app-host'].ansible_host }}:9100"
+    labels:
+      instance: "app_node_exporter"
+  - targets:
+    - "{{ hostvars['app-host'].ansible_host }}:80"
+    labels:
+      instance: "app-ui"
+  - targets:
+    - "{{ hostvars['app-host'].ansible_host }}:8001"
+    labels:
+      instance: "app-crawler"

@@ -1,3 +1,5 @@
+#Ansible
+inventory
 #Terraform
 variables.json
 *.tfstate
