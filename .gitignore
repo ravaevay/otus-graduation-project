@@ -1,6 +1,7 @@
 #Ansible
 inventory
 #Terraform
+.terraform.lock.hcl
 variables.json
 *.tfstate
 *.tfstate.*.backup
