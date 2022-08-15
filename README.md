@@ -29,6 +29,7 @@ Search Engine Crawler - это поисковый бот для сбора те�
     chmod +x create_infra.sh
     ./create_infra.sh
 ```
+
     Будет создана инфраструктура разработки. 
 
 Далее пушим проект в Gitlab-CI либо с GitHub напрямую, указав URL https://github.com/ravaevay/otus-graduation-project.git, либо командой :
