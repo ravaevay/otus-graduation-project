@@ -1,0 +1,23 @@
+variables:
+  DOCKER_HOST: "tcp://docker:2375"
+  DOCKER_TLS_CERTDIR: ""
+
+stages:
+  - testing
+
+# -------------
+# Testing
+# -------------
+test_ui:
+  stage: test
+  image: docker/compose:alpine-1.29.2
+  services:
+    - docker:22.06-rc-dind-rootless
+  variables:
+    COMPOSE_FILE: "microservices/src/docker-compose.yml:app/src/search_engine_ui/tests/docker-compose-tests.yml"
+  script:
+    - docker-compose up -d ui
+    - docker exec -w / src_ui_1 pip install -r /ui/requirements-test.txt
+    - docker exec -w / src_ui_1 coverage run -m unittest discover -s tests/
+    - docker exec -w / src_ui_1 coverage report --include ui/ui.py
+    - docker-compose down
