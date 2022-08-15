@@ -1,0 +1,6 @@
+version: '3.3'
+services:
+  crawler:
+    volumes:
+      - '/builds/root/otus-graduation-project/microservices/src/search_engine_crawler/tests:/tests'
+      - '/builds/root/otus-graduation-project/microservices/src/search_engine_crawler/requirements-test.txt:/crawler/requirements-test.txt'
