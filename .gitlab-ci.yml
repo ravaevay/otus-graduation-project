@@ -10,9 +10,9 @@ stages:
 # -------------
 test_ui:
   stage: testing
-  image: docker/compose:alpine-1.29.2
+  image: docker/compose:1.29.2
   services:
-    - docker:22.06-rc-dind-rootless
+    - docker:20.10.17-dind
   variables:
     COMPOSE_FILE: "microservices/src/docker-compose.yml:microservices/src/search_engine_ui/tests/docker-compose-tests.yml"
   script:
@@ -24,9 +24,9 @@ test_ui:
 
 test_crawler:
   stage: test
-  image: docker/compose:alpine-1.29.2
+  image: docker/compose:1.29.2
   services:
-    - docker:22.06-rc-dind-rootless
+    - docker:20.10.17-dind
   variables:
     COMPOSE_FILE: "microservices/src/docker-compose.yml:microservices/src/search_engine_crawler/tests/docker-compose-tests.yml"
   script:
