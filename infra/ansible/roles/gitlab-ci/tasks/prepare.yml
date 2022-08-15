@@ -1,4 +1,4 @@
-- name: Create directories
+- name: Create directories for Gitlab
   file:
     path: "{{ item }}"
     state: directory
@@ -6,6 +6,12 @@
     - /srv/gitlab/config
     - /srv/gitlab/data
     - /srv/gitlab/logs
+
+- name: Create directories for runners
+  file:
+    path: "/srv/gitlabrunner-{{ '%02d' | format(item) }}"
+    state: directory
+  loop: "{{ range(0, runners_count)|list }}"
 
 - name: Create gitlab network
   docker_network:
