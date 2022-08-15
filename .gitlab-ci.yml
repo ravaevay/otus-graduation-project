@@ -23,7 +23,7 @@ test_ui:
     - docker-compose down
 
 test_crawler:
-  stage: test
+  stage: testing
   image: docker/compose:1.29.2
   services:
     - docker:20.10.17-dind
