@@ -14,7 +14,7 @@ test_ui:
   services:
     - docker:22.06-rc-dind-rootless
   variables:
-    COMPOSE_FILE: "microservices/src/docker-compose.yml:app/src/search_engine_ui/tests/docker-compose-tests.yml"
+    COMPOSE_FILE: "microservices/src/docker-compose.yml:microservices/src/search_engine_ui/tests/docker-compose-tests.yml"
   script:
     - docker-compose up -d ui
     - docker exec -w / src_ui_1 pip install -r /ui/requirements-test.txt
