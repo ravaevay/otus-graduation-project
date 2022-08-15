@@ -7,4 +7,4 @@ tf_bucket_secret_key: YCPKfyd59i0wg85HDE86sLtR7s-pwL9GPXVBYeFo # set yours
 
 gitlab_runner_token: Dfhju39dbklbnci33cju  # GitLab token for runner register, SET YOURS if needed
 gitlab_root_password: 123qwe321  # GitLab password for user root (instance admin), SET YOURS
-runners_count: 1
+#runners_count: 1

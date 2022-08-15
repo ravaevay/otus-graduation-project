@@ -9,10 +9,9 @@
 
 - name: Create directories for runners
   file:
-    path: "/srv/gitlabrunner-{{ '%02d' | format(item) }}"
+    path: "/srv/gitlabrunner-01"
     state: directory
-  loop: "{{ range(0, runners_count)|list }}"
-
+  
 - name: Create gitlab network
   docker_network:
     name: gitlab-net
