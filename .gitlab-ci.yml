@@ -9,7 +9,7 @@ stages:
 # Testing
 # -------------
 test_ui:
-  stage: test
+  stage: testing
   image: docker/compose:alpine-1.29.2
   services:
     - docker:22.06-rc-dind-rootless
