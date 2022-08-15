@@ -50,7 +50,7 @@ services:
       - RMQ_QUEUE=queue
       - RMQ_USERNAME=${RABBITMQ_USER}
       - RMQ_PASSWORD=${RABBITMQ_PASS}
-      - EXCLUDE_URLS=${EXLUDE_URLS}
+      - EXCLUDE_URLS=${EXCLUDE_URLS}
       - URL=${URL}
     ports:
       - 8001:8000
