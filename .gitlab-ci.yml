@@ -4,6 +4,7 @@ variables:
 
 stages:
   - testing
+  - deploy
 
 # -------------
 # Testing
@@ -37,7 +38,7 @@ test_crawler:
     - docker exec -w / src_crawler_1 coverage report --include crawler/crawler.py
     - docker-compose down
 
-  deloy_prod:
+  deploy_prod:
   stage: deploy
   image: groben/terransible:1.3
   before_script:
