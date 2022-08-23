@@ -45,13 +45,13 @@ deploy_prod:
     - mkdir $HOME/yandex-cloud && echo $terraform_key > $HOME/yandex-cloud/terraform_key.json
     - mkdir $HOME/.ssh && cp $otus_project $HOME/.ssh/otus-project && chmod 600 $HOME/.ssh/otus-project
     - cp keys/otus-project.pub $HOME/.ssh/ && chmod 644 $HOME/.ssh/otus-project.pub
-    - chmod 755 app/ansible/
+    - chmod 755 microservices/ansible/
   script:
     - terraform -v
     - ansible --version
-    - cd app/ansible
+    - cd microservices/ansible
     - ansible-galaxy install -r requirements.yml
-    - ansible-playbook playbooks/site.yml --private-key=$HOME/.ssh/otus-project -e tf_bucket_access_key=$tf_bucket_access_key -e tf_bucket_secret_key=$tf_bucket_secret_key
+    - ansible-playbook playbooks/app.yml --private-key=$HOME/.ssh/otus-project -e tf_bucket_access_key=$tf_bucket_access_key -e tf_bucket_secret_key=$tf_bucket_secret_key
     - cd -
     - DYNAMIC_ENVIRONMENT_URL=$(cat microservices/ansible/environments/prod/inventory | awk '/app-host/ {print $2}' | awk -F = '{print "http://"$2".nip.io"}')
     - echo "DYNAMIC_ENVIRONMENT_URL=$DYNAMIC_ENVIRONMENT_URL" >> deploy.env
