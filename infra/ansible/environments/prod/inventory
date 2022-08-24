@@ -1,5 +1,5 @@
 [gitlab_hosts]
-gitlab-host ansible_host=84.201.174.79
+gitlab-host ansible_host=62.84.117.198
 
 [monitoring_hosts]
-monitoring-host ansible_host=84.201.175.19
+monitoring-host ansible_host=51.250.81.134
