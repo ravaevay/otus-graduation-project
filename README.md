@@ -115,3 +115,5 @@ git push <YOUR_GITLAB_CI_URL>/root/$(git rev-parse --show-toplevel | xargs basen
  Prometheus - http://<monitoring_vm_ip>:9090
  Grafana - http://<monitoring_vm_ip>
  ```
+ 
+
