@@ -42,10 +42,12 @@ deploy_prod:
   stage: deploy
   image: groben/terransible:1.3
   before_script:
-    - mkdir $HOME/yandex-cloud && echo $terraform_key > $HOME/yandex-cloud/terraform_key.json
+    - mkdir $HOME/yandex-cloud && echo $terraform-key > $HOME/yandex-cloud/terraform-key.json
     - mkdir $HOME/.ssh && cp $otus_project $HOME/.ssh/otus-project && chmod 600 $HOME/.ssh/otus-project
     - cp keys/otus-project.pub $HOME/.ssh/ && chmod 644 $HOME/.ssh/otus-project.pub
     - chmod 755 microservices/ansible/
+    - cp microservices/terraform/provider_install.tfrc $HOME/.terraformrc
+    - chmod 664 $HOME/.terraformrc
   script:
     - terraform -v
     - ansible --version
