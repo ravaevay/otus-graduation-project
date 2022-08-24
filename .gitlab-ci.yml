@@ -70,4 +70,4 @@ deploy_prod:
   environment:
     name: production
     url: $DYNAMIC_ENVIRONMENT_URL
-  when: manual
+  #when: manual

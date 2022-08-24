@@ -116,3 +116,4 @@ git push <YOUR_GITLAB_CI_URL>/root/$(git rev-parse --show-toplevel | xargs basen
  Grafana - http://<monitoring_vm_ip>
  ```
  
+
