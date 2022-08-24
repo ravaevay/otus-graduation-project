@@ -40,17 +40,24 @@ test_crawler:
 
 deploy_prod:
   stage: deploy
-  image: groben/terransible:1.3
+  image: tomorrowcanw8/terransible:1.7
   before_script:
     - mkdir $HOME/yandex-cloud && echo $terraform_key > $HOME/yandex-cloud/terraform-key.json
-    - mkdir $HOME/.ssh && cp $otus_project $HOME/.ssh/otus-project && chmod 600 $HOME/.ssh/otus-project
-    - cp keys/otus-project.pub $HOME/.ssh/ && chmod 644 $HOME/.ssh/otus-project.pub
+    - mkdir $HOME/.ssh && echo "$otus_project" | tr -d '\r' > $HOME/.ssh/otus-project && chmod 600 $HOME/.ssh/otus-project
+    - cp secret/otus-project.pub $HOME/.ssh/ && chmod 644 $HOME/.ssh/otus-project.pub
     - chmod 755 microservices/ansible/
     - cp microservices/terraform/provider_install.tfrc $HOME/.terraformrc
     - chmod 664 $HOME/.terraformrc
   script:
     - terraform -v
     - ansible --version
+    # -------------
+    # for debug
+    # -------------
+    #- cat $HOME/yandex-cloud/terraform-key.json
+    #- cat $HOME/.terraformrc
+    #- cat $HOME/.ssh/otus-project
+    #- ls -la $HOME/.ssh/
     - cd microservices/ansible
     - ansible-galaxy install -r requirements.yml
     - ansible-playbook playbooks/app.yml --private-key=$HOME/.ssh/otus-project -e tf_bucket_access_key=$tf_bucket_access_key -e tf_bucket_secret_key=$tf_bucket_secret_key
